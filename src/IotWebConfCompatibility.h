@@ -21,11 +21,9 @@
  * creating local aliases for those.
  */
 #ifdef ESP8266
-# define WebServer ESP8266WebServer
-# define HTTPUpdateServer ESP8266HTTPUpdateServer
+#define WebServer ESP8266WebServer
+#define HTTPUpdateServer ESP8266HTTPUpdateServer
 #endif
-
-
 
 /**
  * ESP32 doesn't implement a HTTPUpdateServer. However it seams, that to code
@@ -40,54 +38,49 @@
 #ifndef __HTTP_UPDATE_SERVER_H
 #define __HTTP_UPDATE_SERVER_H
 
-#include <WiFi.h>
-#include <WiFiClient.h>
-#include <WebServer.h>
 #include <StreamString.h>
 #include <Update.h>
+#include <WebServer.h>
+#include <WiFi.h>
+#include <WiFiClient.h>
 
 #define emptyString F("")
 
 class WebServer;
 
-class HTTPUpdateServer
-{
-  public:
-    HTTPUpdateServer(bool serial_debug=false);
+class HTTPUpdateServer {
+ public:
+  HTTPUpdateServer(bool serial_debug = false);
 
-    void setup(WebServer *server)
-    {
-      setup(server, emptyString, emptyString);
-    }
+  void setup(WebServer* server) { setup(server, emptyString, emptyString); }
 
-    void setup(WebServer *server, const String& path)
-    {
-      setup(server, path, emptyString, emptyString);
-    }
+  void setup(WebServer* server, const String& path) {
+    setup(server, path, emptyString, emptyString);
+  }
 
-    void setup(WebServer *server, const String& username, const String& password)
-    {
-      setup(server, "/update", username, password);
-    }
+  void setup(WebServer* server, const String& username,
+             const String& password) {
+    setup(server, "/update", username, password);
+  }
 
-    void setup(WebServer *server, const String& path, const String& username, const String& password);
+  void setup(WebServer* server, const String& path, const String& username,
+             const String& password);
 
-    void updateCredentials(const String& username, const String& password)
-    {
-      _username = username;
-      _password = password;
-    }
+  void updateCredentials(const String& username, const String& password) {
+    _username = username;
+    _password = password;
+  }
 
-  protected:
-    void _setUpdaterError();
+ protected:
+  void _setUpdaterError();
 
-  private:
-    bool _serial_output;
-    WebServer *_server;
-    String _username;
-    String _password;
-    bool _authenticated;
-    String _updaterError;
+ private:
+  bool _serial_output;
+  WebServer* _server;
+  String _username;
+  String _password;
+  bool _authenticated;
+  String _updaterError;
 };
 #endif
 
