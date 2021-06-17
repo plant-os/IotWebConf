@@ -113,8 +113,6 @@ void HTTPUpdateServer::setup(WebServer *server, const String& path, const String
 void HTTPUpdateServer::_setUpdaterError()
 {
   if (_serial_output) Update.printError(Serial);
-  StreamString str;
-  Update.printError(str);
-  _updaterError = str.c_str();
+  _updaterError = Update.errorString();
 }
 #endif

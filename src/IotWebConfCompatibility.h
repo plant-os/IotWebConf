@@ -38,7 +38,6 @@
 #ifndef __HTTP_UPDATE_SERVER_H
 #define __HTTP_UPDATE_SERVER_H
 
-#include <StreamString.h>
 #include <Update.h>
 #include <WebServer.h>
 #include <WiFi.h>
